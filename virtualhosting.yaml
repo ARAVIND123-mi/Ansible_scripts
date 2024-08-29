@@ -1,0 +1,35 @@
+- name: Virtual hosting in aravind servers
+  hosts: aravind
+  become: yes
+  tasks:
+    - name: Copying configuration to aravind server
+      copy:
+        src: /home/ec2-user/httpd.conf1
+        dest: /etc/httpd/conf/httpd.conf
+
+- name: Virtual hosting in abhishek servers
+  hosts: abhishek
+  become: yes
+  tasks:
+    - name: Copying configuration to abhishek server
+      copy:
+        src: /home/ec2-user/httpd.conf2
+        dest: /etc/httpd/conf/httpd.conf
+
+- name: Virtual hosting in manish servers
+  hosts: manish
+  become: yes
+  tasks:
+    - name: Copying configuration to manish server
+      copy:
+        src: /home/ec2-user/httpd.conf3
+        dest: /etc/httpd/conf/httpd.conf
+
+- name: Restsrting the server configuration files
+  hosts: all
+  become: yes
+  tasks:
+    - name: All the three servers are restarting
+      service:
+        name: httpd
+        state: restarted

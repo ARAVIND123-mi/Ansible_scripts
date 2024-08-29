@@ -1,0 +1,39 @@
+- name: Creating directories on the web server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Creating ecomm directory
+      file:
+        path: /var/www/html/ecomm
+        state: directory
+
+    - name: Creating Mario directory
+      file:
+        path: /var/www/html/Mario
+        state: directory
+
+    - name: Creating food directory
+      file:
+        path: /var/www/html/food
+        state: directory
+
+- name: Moving the cloned repository to document root
+  hosts: all
+  become: yes
+  tasks:
+    - name: Cloning and moving the ecomm directory
+      git:
+        repo: https://github.com/ARAVIND123-mi/ecomm.git
+        dest: /var/www/html/ecomm/
+
+    - name: Cloning and moving the Mario directory
+      git:
+        repo: https://github.com/ARAVIND123-mi/Mario.git
+        dest: /var/www/html/Mario/
+
+    - name: Cloning and moving the food directory
+      git:
+        repo: https://github.com/ARAVIND123-mi/food.git
+        dest: /var/www/html/food/
+
+
